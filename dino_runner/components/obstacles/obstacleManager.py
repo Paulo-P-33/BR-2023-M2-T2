@@ -10,7 +10,8 @@ class ObstacleManager:
 
     def update(self, game):
         if len(self.obstacles) == 0:
-            self.obstacles.append(Cactus(SMALL_CACTUS))
+            allCactus = SMALL_CACTUS + LARGE_CACTUS
+            self.obstacles.append(Cactus(allCactus))
         
         for obstacle in self.obstacles:
             obstacle.update(game.game_speed, self.obstacles)
