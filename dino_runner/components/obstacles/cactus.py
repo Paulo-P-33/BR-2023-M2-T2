@@ -4,7 +4,7 @@ from dino_runner.components.obstacles.obstacle import Obstacle
 
 
 class Cactus(Obstacle):
-    def __init__(self, image):
+    def __init__(self, image, rect_y):
         self.type = random.randint(0, len(image) - 1)
         super().__init__(image, self.type)
-        self.rect.y = 325
+        self.rect.y = rect_y
