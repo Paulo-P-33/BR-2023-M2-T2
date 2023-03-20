@@ -57,7 +57,7 @@ class Game:
     def update_score(self):
         self.score += 1
         if self.score % 100 == 0:
-            self.game_speed += 5 # regulador velocidade da partida
+            self.game_speed += 5 # regulador de velocidade da partida
 
     def draw(self):
         self.clock.tick(FPS)
@@ -98,7 +98,11 @@ class Game:
         if self.death_count == 0:
             self.write_text("Press any key to start", half_screen_width, half_screen_height)
         else:
-            self.screen.blit(ICON, (half_screen_width -20, half_screen_height - 140))
+            self.screen.blit(ICON, (half_screen_width - 30, half_screen_height - 140))
+            self.write_text(f"Score: {self.score}", half_screen_width, half_screen_height + 10)
+            self.write_text(f"Death count: {self.death_count}", half_screen_width , half_screen_height + 40)
+            print()
+            self.write_text("Press any key to start", half_screen_width , half_screen_height + 100)
 
         pygame.display.update() #.flip()
 
