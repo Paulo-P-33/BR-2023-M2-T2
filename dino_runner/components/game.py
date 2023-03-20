@@ -35,6 +35,8 @@ class Game:
 
     def run(self):
         # Game loop: events - update - draw
+        self.score = 0
+        self.game_speed = 20
         self.playing = True
         self.obstacle_manager.reset_obstacles()
         while self.playing:
@@ -98,7 +100,7 @@ class Game:
         if self.death_count == 0:
             self.write_text("Press any key to start", half_screen_width, half_screen_height)
         else:
-            self.screen.blit(ICON, (half_screen_width - 30, half_screen_height - 140))
+            self.screen.blit(ICON, (half_screen_width - 40, half_screen_height - 140))
             self.write_text(f"Score: {self.score}", half_screen_width, half_screen_height + 10)
             self.write_text(f"Death count: {self.death_count}", half_screen_width , half_screen_height + 40)
             print()
@@ -114,3 +116,4 @@ class Game:
         text_rect = text.get_rect()
         text_rect.center = (screen_width, screen_height)
         self.screen.blit(text, text_rect)
+    
