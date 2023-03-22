@@ -1,12 +1,12 @@
 import random
 
-from dino_runner.utils.constants import SHIELD, SHIELD_TYPE
+from dino_runner.utils.constants import SHIELD, POWER_UP_TYPE
 from dino_runner.components.power_ups.power_up import PowerUp
 
 
 class Shield(PowerUp):
     def __init__(self):
         self.image = SHIELD
-        self.type = SHIELD_TYPE
+        self.type = POWER_UP_TYPE["shield"]
         super().__init__(self.image, self.type)
         self.rect.y = random.choice([200, 300])
