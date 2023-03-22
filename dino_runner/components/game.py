@@ -1,6 +1,6 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, DEFAULT_TYPE, FPS
+from dino_runner.utils.constants import BG, ICON, GAME_OVER, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, DEFAULT_TYPE, FPS
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacleManager import ObstacleManager
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
@@ -116,6 +116,7 @@ class Game:
             self.write_text("Press any key to start", half_screen_width, half_screen_height)
         else:
             self.screen.blit(ICON, (half_screen_width - 40, half_screen_height - 140))
+            self.screen.blit(GAME_OVER, (half_screen_width - 170, half_screen_height - 200))
             self.write_text(f"Score: {self.score}", half_screen_width, half_screen_height + 10)
             self.write_text(f"Death count: {self.death_count}", half_screen_width , half_screen_height + 40)
             print()
