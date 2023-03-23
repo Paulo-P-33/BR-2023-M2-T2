@@ -1,6 +1,6 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, GAME_OVER, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, DEFAULT_TYPE, FPS
+from dino_runner.utils.constants import BG, ICON, GAME_OVER, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, DEFAULT_TYPE, FPS, HEART
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacleManager import ObstacleManager
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
@@ -21,6 +21,7 @@ class Game:
         self.y_pos_bg = 380
         self.score = 0
         self.death_count = 0
+        self.heart_count = 0
 
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
@@ -58,7 +59,7 @@ class Game:
         self.player.update(user_input)
         self.obstacle_manager.update(self)
         self.update_score()
-        self.power_up_manager.update(self.score, self.game_speed, self.player)
+        self.power_up_manager.update(self.score, self, self.player)
 
     def update_score(self):
         self.score += 1
@@ -89,6 +90,8 @@ class Game:
 
     def draw_score(self):
         self.write_text(f"Score: {self.score}", 1000, 50)
+        self.write_heart(HEART, 800, 36)
+        
 
     def draw_power_up_time(self):
         if self.player.has_power_up:
@@ -133,3 +136,6 @@ class Game:
         text_rect.center = (screen_width, screen_height)
         self.screen.blit(text, text_rect)
     
+    def write_heart(self, image, screen_width, screen_height):
+        self.screen.blit(image, (screen_width, screen_height))
+        self.write_text(f"x{self.heart_count}", 840, 50)

@@ -19,12 +19,21 @@ class ObstacleManager:
             obstacle.update(game.game_speed, self.obstacles)
             if game.player.dino_rect.colliderect(obstacle.rect):
                 if not game.player.has_power_up:
-                    pygame.time.delay(500)
-                    game.playing = False
-                    game.death_count += 1
-                    break
+                    if game.heart_count > 0:
+                        game.heart_count -= 1
+                        self.obstacles.remove(obstacle)
+                        break
+                    elif game.heart_count == 0:
+                        pygame.time.delay(500)
+                        game.playing = False
+                        game.death_count += 1
+                        break
                 elif game.player.type == "hammer": 
                     self.obstacles.remove(obstacle)
+                elif game.player.type == "shield":
+                    continue
+
+
 
     def draw(self, screen):
         for obstacle in self.obstacles:
