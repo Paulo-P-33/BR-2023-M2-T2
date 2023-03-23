@@ -22,6 +22,7 @@ class Game:
         self.score = 0
         self.death_count = 0
         self.heart_count = 0
+        self.highest_score = 0
 
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
@@ -90,9 +91,12 @@ class Game:
 
     def draw_score(self):
         self.write_text(f"Score: {self.score}", 1000, 50)
-        self.write_heart(HEART, 800, 36)
+        self.draw_heart(HEART, 800, 36)
+    
+    def draw_heart(self, image, screen_width, screen_height):
+        self.screen.blit(image, (screen_width, screen_height))
+        self.write_text(f"x{self.heart_count}", 840, 50)
         
-
     def draw_power_up_time(self):
         if self.player.has_power_up:
             time_to_show = round((self.player.power_up_time - pygame.time.get_ticks()) / 1000, 2)
@@ -120,10 +124,13 @@ class Game:
         else:
             self.screen.blit(ICON, (half_screen_width - 40, half_screen_height - 140))
             self.screen.blit(GAME_OVER, (half_screen_width - 170, half_screen_height - 200))
-            self.write_text(f"Score: {self.score}", half_screen_width, half_screen_height + 10)
-            self.write_text(f"Death count: {self.death_count}", half_screen_width , half_screen_height + 40)
+            if self.score > self.highest_score:
+                self.highest_score = self.score
+            self.write_text(f"Highest score: {self.highest_score}", half_screen_width, half_screen_height + 5)
+            self.write_text(f"Score: {self.score}", half_screen_width, half_screen_height + 30)
+            self.write_text(f"Death count: {self.death_count}", half_screen_width , half_screen_height + 60)
             print()
-            self.write_text("Press any key to start", half_screen_width , half_screen_height + 100)
+            self.write_text("Press any key to start", half_screen_width , half_screen_height + 120)
 
         pygame.display.update() #.flip()
 
@@ -136,6 +143,4 @@ class Game:
         text_rect.center = (screen_width, screen_height)
         self.screen.blit(text, text_rect)
     
-    def write_heart(self, image, screen_width, screen_height):
-        self.screen.blit(image, (screen_width, screen_height))
-        self.write_text(f"x{self.heart_count}", 840, 50)
+    
